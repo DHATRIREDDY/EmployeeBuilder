@@ -3,7 +3,7 @@ package programscc;
 public class EmployeeBuilder {
 public static void main(String[] args)
 {
-	System.out.println("Welcome to Employee Wage Compuation Program ");
+    System.out.println("Welcome to Employee Wage Compuation Program ");
     int isPresent=1;
     int empRatePerHr=20, empHrs=8,salary=0;
     double empCheck=Math.floor(Math.random()*10)%2;
