@@ -8,6 +8,7 @@ public class EmployeeBuilder {
     private final int empRatePerHr;
     private final int workingDays;
     private final int maxHrsMonth;
+    private int totalSalary;
     public EmployeeBuilder(String company,int empRatePerHr,int workingDays,int maxHrsMonth)
     {
     	this.company=company;
@@ -15,9 +16,9 @@ public class EmployeeBuilder {
     	this.workingDays=workingDays;
     	this.maxHrsMonth=maxHrsMonth;
     }
-    int empWageComputation()
+    void empWageComputation()
 	{
-	    int empHrs=0,salary=0,workingHrs=0,totalworkingDays=0,totalEmpHrs=0,totalSalary=0;
+	    int empHrs=0,salary=0,workingHrs=0,totalworkingDays=0,totalEmpHrs=0;
 	    System.out.println("Day\tEmpHrs\tSalary\tTotalEmpHrs");
 	    while(workingHrs<=maxHrsMonth && totalworkingDays<workingDays)
 	    {
@@ -38,19 +39,21 @@ public class EmployeeBuilder {
 	      totalEmpHrs+=empHrs; 
 	      System.out.println(totalworkingDays+"\t"+empHrs+"\t"+salary+"\t"+totalEmpHrs);
 	    }
-	    return totalEmpHrs*empRatePerHr;
+	    totalSalary=totalEmpHrs*empRatePerHr;
 	    //System.out.println("Total Salary:"+totalSalary);
 	}
+   public String toString()
+   {
+	   return "Total EmpWage for company:"+ company +" is "+ totalSalary;
+   }
    public static void main(String[] args)
    {
 	 System.out.println("Welcome to Employee Wage Compuation Program ");
-     EmployeeBuilder dmart=new EmployeeBuilder("DMart",20,20,100);
-     EmployeeBuilder bigBasket=new EmployeeBuilder("BigBasket",20,2,10);
-     EmployeeBuilder more=new EmployeeBuilder("More",30,20,100);
-     System.out.println("Total EmpWage for Company"+dmart.company+" is :"+dmart.empWageComputation());
-     System.out.println("Total EmpWgae for company"+bigBasket.company+"is:"+bigBasket.empWageComputation());
-     System.out.println("Total EmpWage for Company"+more.company+" is :"+more.empWageComputation());
-     
+     EmployeeBuilder dMart=new EmployeeBuilder("DMart",20,2,10);
+     EmployeeBuilder bigBasket=new EmployeeBuilder("BigBasket",20,4,30);
+     dMart.empWageComputation();
+     System.out.println(dMart);
+     bigBasket.empWageComputation();
+     System.out.println(bigBasket);
    }
-
 }
