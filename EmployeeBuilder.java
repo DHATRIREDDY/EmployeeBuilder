@@ -1,4 +1,11 @@
 package programscc;
+interface EmployeeWage
+{
+	void addCompanyEmpWage(String company,int empRatePerHr,int workingDays,int maxHrsMonth);
+	void computeEmpWage();
+	int computeEmpWage(CompanyEmpWage companyEmpWage);
+	
+}
 class CompanyEmpWage
 {
 	 public final String company;
@@ -22,7 +29,7 @@ class CompanyEmpWage
 		   return "Total EmpWage for company:" +company+" is "+totalSalary;
 	   }
 }
-public class EmployeeBuilder {
+public class EmployeeBuilder implements EmployeeWage {
 	public static final int isPartTime=1;
     public static final int isFullTime=2;
     
@@ -32,12 +39,12 @@ public class EmployeeBuilder {
     {
       companyEmpWageArray = new CompanyEmpWage[5];
     }
-    private void addCompanyEmpWage(String company,int empRatePerHr,int workingDays,int maxHrsMonth)
+    public void addCompanyEmpWage(String company,int empRatePerHr,int workingDays,int maxHrsMonth)
     {
     	companyEmpWageArray[no_ofCompanies]=new CompanyEmpWage(company,empRatePerHr,workingDays,maxHrsMonth);
     	no_ofCompanies++;
     }
-    private void computeEmpWage()
+   public  void computeEmpWage()
     {
     	for(int i=0;i<no_ofCompanies;i++)
     	{
@@ -45,7 +52,7 @@ public class EmployeeBuilder {
     	   System.out.println(companyEmpWageArray[i]);
     	}
     }
-    int computeEmpWage(CompanyEmpWage companyEmpWage)
+   public int computeEmpWage(CompanyEmpWage companyEmpWage)
     {
 	    int empHrs=0,salary=0,workingHrs=0,totalworkingDays=0,totalEmpHrs=0;
 	    System.out.println("Day\tEmpHrs\tSalary\tTotalEmpHrs");
