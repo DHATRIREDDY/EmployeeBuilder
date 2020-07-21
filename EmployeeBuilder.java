@@ -1,4 +1,5 @@
 package programscc;
+import java.util.*;
 interface EmployeeWage
 {
 	void addCompanyEmpWage(String company,int empRatePerHr,int workingDays,int maxHrsMonth);
@@ -26,7 +27,7 @@ class CompanyEmpWage
 	 }
 	 public String toString()
 	   {
-		   return "Total EmpWage for company:" +company+" is "+totalSalary;
+		   return "Total EmpWage for " +company+" company is "+totalSalary;
 	   }
 }
 public class EmployeeBuilder implements EmployeeWage {
@@ -34,22 +35,22 @@ public class EmployeeBuilder implements EmployeeWage {
     public static final int isFullTime=2;
     
     private int no_ofCompanies=0;
-    private CompanyEmpWage[] companyEmpWageArray;
+    ArrayList<CompanyEmpWage> companyEmpWageArray;
     public EmployeeBuilder()
     {
-      companyEmpWageArray = new CompanyEmpWage[5];
+      companyEmpWageArray = new ArrayList<CompanyEmpWage>();
     }
     public void addCompanyEmpWage(String company,int empRatePerHr,int workingDays,int maxHrsMonth)
     {
-    	companyEmpWageArray[no_ofCompanies]=new CompanyEmpWage(company,empRatePerHr,workingDays,maxHrsMonth);
+    	companyEmpWageArray.add(new CompanyEmpWage(company,empRatePerHr,workingDays,maxHrsMonth));
     	no_ofCompanies++;
     }
    public  void computeEmpWage()
     {
     	for(int i=0;i<no_ofCompanies;i++)
     	{
-    	   companyEmpWageArray[i].TotalSalary(this.computeEmpWage(companyEmpWageArray[i]));
-    	   System.out.println(companyEmpWageArray[i]);
+    	   companyEmpWageArray.get(i).TotalSalary(this.computeEmpWage(companyEmpWageArray.get(i)));
+    	   System.out.println(companyEmpWageArray.get(i));
     	}
     }
    public int computeEmpWage(CompanyEmpWage companyEmpWage)
@@ -81,7 +82,7 @@ public class EmployeeBuilder implements EmployeeWage {
    {
 	 System.out.println("Welcome to Employee Wage Compuation Program ");
      EmployeeBuilder empArray=new EmployeeBuilder();
-     empArray.addCompanyEmpWage("Dmart",20,4,10);
+     empArray.addCompanyEmpWage("Dmart",20,4,100);
      empArray.addCompanyEmpWage("Reliance",20,2,20);
      empArray.computeEmpWage();
    }
