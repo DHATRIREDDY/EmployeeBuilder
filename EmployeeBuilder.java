@@ -1,12 +1,21 @@
 package programscc;
 
 public class EmployeeBuilder {
-	static final int isPartTime=1;
-    static final int isFullTime=2;
-    static final int empRatePerHr=20;
-    static final int maxHrsMonth=100;
-    static final int workingDays=20;
-    void empWageComputation()
+	public static final int isPartTime=1;
+    public static final int isFullTime=2;
+    
+    private final String company;
+    private final int empRatePerHr;
+    private final int workingDays;
+    private final int maxHrsMonth;
+    public EmployeeBuilder(String company,int empRatePerHr,int workingDays,int maxHrsMonth)
+    {
+    	this.company=company;
+    	this.empRatePerHr=empRatePerHr;
+    	this.workingDays=workingDays;
+    	this.maxHrsMonth=maxHrsMonth;
+    }
+    int empWageComputation()
 	{
 	    int empHrs=0,salary=0,workingHrs=0,totalworkingDays=0,totalEmpHrs=0,totalSalary=0;
 	    System.out.println("Day\tEmpHrs\tSalary\tTotalEmpHrs");
@@ -29,14 +38,19 @@ public class EmployeeBuilder {
 	      totalEmpHrs+=empHrs; 
 	      System.out.println(totalworkingDays+"\t"+empHrs+"\t"+salary+"\t"+totalEmpHrs);
 	    }
-	    totalSalary=totalEmpHrs*empRatePerHr;
-	    System.out.println("Total Salary:"+totalSalary);
+	    return totalEmpHrs*empRatePerHr;
+	    //System.out.println("Total Salary:"+totalSalary);
 	}
    public static void main(String[] args)
    {
 	 System.out.println("Welcome to Employee Wage Compuation Program ");
-     EmployeeBuilder b=new EmployeeBuilder();
-     b.empWageComputation();
+     EmployeeBuilder dmart=new EmployeeBuilder("DMart",20,20,100);
+     EmployeeBuilder bigBasket=new EmployeeBuilder("BigBasket",20,2,10);
+     EmployeeBuilder more=new EmployeeBuilder("More",30,20,100);
+     System.out.println("Total EmpWage for Company"+dmart.company+" is :"+dmart.empWageComputation());
+     System.out.println("Total EmpWgae for company"+bigBasket.company+"is:"+bigBasket.empWageComputation());
+     System.out.println("Total EmpWage for Company"+more.company+" is :"+more.empWageComputation());
+     
    }
 
 }
