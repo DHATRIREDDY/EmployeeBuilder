@@ -14,12 +14,14 @@ class CompanyEmpWage
 	 public final int workingDays;
 	 public final int maxHrsMonth;
 	 public int totalSalary;
+	 public int wagesArray[];
 	 public CompanyEmpWage(String company,int empRatePerHr,int workingDays,int maxHrsMonth)
 	 {
 		    this.company=company;
 	    	this.empRatePerHr=empRatePerHr;
 	    	this.workingDays=workingDays;
 	    	this.maxHrsMonth=maxHrsMonth;
+	    	wagesArray=new int[workingDays+1];
 	 }
 	 public void TotalSalary(int totalSalary)
 	 {
@@ -74,7 +76,8 @@ public class EmployeeBuilder implements EmployeeWage {
 	     }
 	      salary=empHrs*companyEmpWage.empRatePerHr;
 	      totalEmpHrs+=empHrs; 
-	      System.out.println(totalworkingDays+"\t"+empHrs+"\t"+salary+"\t"+totalEmpHrs);
+	      companyEmpWage.wagesArray[totalworkingDays]=salary;
+	      System.out.println(totalworkingDays+"\t"+empHrs+"\t"+companyEmpWage.wagesArray[totalworkingDays]+"\t"+totalEmpHrs);
 	    }
 	    return totalEmpHrs*companyEmpWage.empRatePerHr;
 	}
