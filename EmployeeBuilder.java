@@ -5,6 +5,7 @@ interface EmployeeWage
 	void addCompanyEmpWage(String company,int empRatePerHr,int workingDays,int maxHrsMonth);
 	void computeEmpWage();
 	int computeEmpWage(CompanyEmpWage companyEmpWage);
+	int getTotalWage(String company);
 	
 }
 class CompanyEmpWage
@@ -38,13 +39,17 @@ public class EmployeeBuilder implements EmployeeWage {
     
     private int no_ofCompanies=0;
     ArrayList<CompanyEmpWage> companyEmpWageArray;
+    HashMap<String,CompanyEmpWage> getTotalWageMap;
     public EmployeeBuilder()
     {
       companyEmpWageArray = new ArrayList<CompanyEmpWage>();
+      getTotalWageMap=new HashMap<String,CompanyEmpWage>();
     }
     public void addCompanyEmpWage(String company,int empRatePerHr,int workingDays,int maxHrsMonth)
     {
-    	companyEmpWageArray.add(new CompanyEmpWage(company,empRatePerHr,workingDays,maxHrsMonth));
+    	CompanyEmpWage companyEmpWage = new CompanyEmpWage(company,empRatePerHr,workingDays,maxHrsMonth);
+    	companyEmpWageArray.add(companyEmpWage);
+        getTotalWageMap.put(company,companyEmpWage);
     	no_ofCompanies++;
     }
    public  void computeEmpWage()
@@ -55,6 +60,10 @@ public class EmployeeBuilder implements EmployeeWage {
     	   System.out.println(companyEmpWageArray.get(i));
     	}
     }
+   public int getTotalWage(String company)
+   {
+	   return getTotalWageMap.get(company).totalSalary;
+   }
    public int computeEmpWage(CompanyEmpWage companyEmpWage)
     {
 	    int empHrs=0,salary=0,workingHrs=0,totalworkingDays=0,totalEmpHrs=0;
@@ -85,8 +94,11 @@ public class EmployeeBuilder implements EmployeeWage {
    {
 	 System.out.println("Welcome to Employee Wage Compuation Program ");
      EmployeeBuilder empArray=new EmployeeBuilder();
-     empArray.addCompanyEmpWage("Dmart",20,4,100);
+     empArray.addCompanyEmpWage("DMart",20,4,100);
      empArray.addCompanyEmpWage("Reliance",20,2,20);
      empArray.computeEmpWage();
+     System.out.println("Total Wage for DMart company :"+empArray.getTotalWage("DMart"));
+     System.out.println("Total Wage for Reliance  company :"+empArray.getTotalWage("Reliance"));
+     
    }
 }
